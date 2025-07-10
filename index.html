@@ -20,6 +20,9 @@ body {
   opacity: 0;
   transition: opacity 0.5s ease-in;
 }
+#quote.show {
+  opacity: 1;
+}
 button {
   padding: 10px 20px;
   font-size: 1em;
@@ -39,17 +42,20 @@ const quotes = {
   happy: [
     "웃음은 영혼의 태양이다.",
     "행복은 가까이에 있다.",
-    "미소는 마음의 휴식이다."
+    "미소는 마음의 휴식이다.",
+    "기쁨은 작은 순간에서 시작된다."
   ],
   sad: [
     "눈물은 마음의 빗물이다.",
     "어둠 후에 새벽이 온다.",
-    "슬픔도 지나간다."
+    "슬픔도 지나간다.",
+    "고통 뒤엔 성장만이 남는다."
   ],
   motivational: [
     "포기는 선택이 아니다.",
     "도전은 성장의 시작이다.",
-    "오늘의 노력이 내일의 변화를 만든다."
+    "오늘의 노력이 내일의 변화를 만든다.",
+    "성공은 끈기 있는 이에게 미소 짓는다."
   ]
 };
 const quoteEl = document.getElementById('quote');
@@ -60,9 +66,12 @@ button.addEventListener('click', () => {
   const emotion = emotionSelect.value;
   const list = quotes[emotion];
   const random = Math.floor(Math.random() * list.length);
-  quoteEl.style.opacity = 0; // reset opacity for fade-in
+  quoteEl.classList.remove('show'); // reset for fade-in
   quoteEl.textContent = list[random];
-  setTimeout(() => { quoteEl.style.opacity = 1; }, 50); // small delay to trigger transition
+  // small delay ensures the transition triggers
+  setTimeout(() => {
+    quoteEl.classList.add('show');
+  }, 50);
 });
 </script>
 </body>
