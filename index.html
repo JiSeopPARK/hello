@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>명언 감정별 표시</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background: #f0f0f0;
+}
+#quote {
+  margin: 20px 0;
+  font-size: 1.5em;
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+}
+#quote.show {
+  opacity: 1;
+}
+button {
+  padding: 10px 20px;
+  font-size: 1em;
+}
+</style>
+</head>
+<body>
+<select id="emotion">
+  <option value="happy">기쁨</option>
+  <option value="sad">슬픔</option>
+  <option value="motivational">동기부여</option>
+</select>
+<button id="showQuote">명언 보기</button>
+<div id="quote"></div>
+<script>
+const quotes = {
+  happy: [
+    "웃음은 영혼의 태양이다.",
+    "행복은 가까이에 있다.",
+    "미소는 마음의 휴식이다.",
+    "기쁨은 작은 순간에서 시작된다."
+  ],
+  sad: [
+    "눈물은 마음의 빗물이다.",
+    "어둠 후에 새벽이 온다.",
+    "슬픔도 지나간다.",
+    "고통 뒤엔 성장만이 남는다."
+  ],
+  motivational: [
+    "포기는 선택이 아니다.",
+    "도전은 성장의 시작이다.",
+    "오늘의 노력이 내일의 변화를 만든다.",
+    "성공은 끈기 있는 이에게 미소 짓는다."
+  ]
+};
+const quoteEl = document.getElementById('quote');
+const emotionSelect = document.getElementById('emotion');
+const button = document.getElementById('showQuote');
+
+button.addEventListener('click', () => {
+  const emotion = emotionSelect.value;
+  const list = quotes[emotion];
+  const random = Math.floor(Math.random() * list.length);
+  quoteEl.classList.remove('show'); // reset for fade-in
+  quoteEl.textContent = list[random];
+  // small delay ensures the transition triggers
+  setTimeout(() => {
+    quoteEl.classList.add('show');
+  }, 50);
+});
+</script>
+</body>
+</html>
